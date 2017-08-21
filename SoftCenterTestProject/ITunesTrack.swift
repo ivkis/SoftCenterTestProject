@@ -12,12 +12,12 @@ import UIKit
 class ITunesTrack {
 
     let trackName: String
-    let artistViewUrl: String
+    let artworkUrl: String
     let artistName:String
 
     init(json: [String: AnyObject]) {
         trackName = json["trackName"] as? String ?? ""
-        artistViewUrl = json["artistViewUrl"] as? String ?? ""
+        artworkUrl = json["artworkUrl100"] as? String ?? ""
         artistName = json["artistName"] as? String ?? ""
     }
 }

@@ -19,20 +19,19 @@ class ITunesDataSource: NSObject {
     }
 
     func loadData(query: String?) {
-        func loadData(query: String?) {
-            guard let query = query else {
-                return
-            }
-            API.shared.getITunesTrack(query: query) { tracks in
-                self.iTunesTracks = tracks
-                self.tableView.reloadData()
-                if tracks == nil {
-                    print("Error on server")
-                }
+        guard let query = query else {
+            return
+        }
+        API.shared.getITunesTrack(query: query) { tracks in
+            self.iTunesTracks = tracks
+            self.tableView.reloadData()
+            if tracks == nil {
+                print("Error on server")
             }
         }
     }
 }
+
 
 extension ITunesDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

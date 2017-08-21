@@ -60,13 +60,13 @@ class SearchResultsCell: UITableViewCell {
         titleLabel.text = gitHubUser.login
         subtitleLabel.text = gitHubUser.url
         setPhotoImageWith(url: gitHubUser.avatarUrl)
-        setRightUI(isRight)
+        setRightUI(!isRight)
     }
 
     func configure(with iTunesTrack: ITunesTrack, isRight: Bool) {
         titleLabel.text = iTunesTrack.trackName
         subtitleLabel.text = iTunesTrack.artistName
-        setPhotoImageWith(url: iTunesTrack.artistViewUrl)
+        setPhotoImageWith(url: iTunesTrack.artworkUrl)
         setRightUI(isRight)
     }
 
