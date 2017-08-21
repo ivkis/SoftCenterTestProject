@@ -46,21 +46,31 @@ class SearchResultsCell: UITableViewCell {
         self.contentView.addSubview(subtitleLabel)
     }
 
-    func configure(with gitHubUser: GitHubUser, isRight: Bool) {
-        titleLabel.text = gitHubUser.login
-        subtitleLabel.text = gitHubUser.url
+    func setPhotoImageWith(url: String) {
         photoImageView.image = nil
-
         imageLoadTask?.cancel()
-        if !gitHubUser.avatarUrl.isEmpty {
-            imageLoadTask = API.shared.getImageFrom(url: gitHubUser.avatarUrl) { image in
+        if !url.isEmpty {
+            imageLoadTask = API.shared.getImageFrom(url: url) { image in
                 self.photoImageView.image = image
             }
         }
-        setEvenUI(isRight)
     }
 
-    func setEvenUI(_ isRight: Bool) {
+    func configure(with gitHubUser: GitHubUser, isRight: Bool) {
+        titleLabel.text = gitHubUser.login
+        subtitleLabel.text = gitHubUser.url
+        setPhotoImageWith(url: gitHubUser.avatarUrl)
+        setRightUI(isRight)
+    }
+
+    func configure(with iTunesTrack: ITunesTrack, isRight: Bool) {
+        titleLabel.text = iTunesTrack.trackName
+        subtitleLabel.text = iTunesTrack.artistName
+        setPhotoImageWith(url: iTunesTrack.artistViewUrl)
+        setRightUI(isRight)
+    }
+
+    func setRightUI(_ isRight: Bool) {
         contentConstraints?.forEach({ $0.isActive = false })
         if isRight {
             contentConstraints = [

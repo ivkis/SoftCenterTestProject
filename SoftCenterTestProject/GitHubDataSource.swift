@@ -10,6 +10,7 @@ import UIKit
 
 
 class GitHubDataSource: NSObject {
+
     var gitHubUsers: [GitHubUser]?
     var tableView: UITableView
 

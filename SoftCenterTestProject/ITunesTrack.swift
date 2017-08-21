@@ -10,6 +10,7 @@ import UIKit
 
 
 class ITunesTrack {
+
     let trackName: String
     let artistViewUrl: String
     let artistName:String

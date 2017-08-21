@@ -10,6 +10,7 @@ import UIKit
 
 
 class SearchViewController: UIViewController {
+
     var tableView: UITableView!
     var searchBar: UISearchBar!
 
