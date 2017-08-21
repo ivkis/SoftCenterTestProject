@@ -13,6 +13,8 @@ class SearchViewController: UIViewController {
     var tableView: UITableView!
     var searchBar: UISearchBar!
 
+    var gitHubUsers: [GitHubUser]?
+
     override func loadView() {
         view = UIView()
         view.backgroundColor = UIColor.white
@@ -23,10 +25,12 @@ class SearchViewController: UIViewController {
 
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.delegate = self
         view.addSubview(searchBar)
 
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
         view.addSubview(tableView)
 
         view.addConstraints([
@@ -41,6 +45,46 @@ class SearchViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+            ])
+    }
+
+    func loadData() {
+        guard let query = searchBar.text else {
+            return
+        }
+        API.shared.getGitHubUsers(query: query) { users in
+            self.gitHubUsers = users
+            self.tableView.reloadData()
+            if users == nil {
+                let alertController = UIAlertController(title: "Data not available", message: "Sorry, an error occurred. Update query.", preferredStyle: .alert)
+                let alertActionUpdate = UIAlertAction(title: "Update", style: .default, handler: { action in
+                    self.loadData()
+                })
+                let alertActionCancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                alertController.addAction(alertActionUpdate)
+                alertController.addAction(alertActionCancel)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return gitHubUsers?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        let user = gitHubUsers?[indexPath.row]
+        cell.textLabel?.text = user?.login
+
+        return cell
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        loadData()
     }
 }

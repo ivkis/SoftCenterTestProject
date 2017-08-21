@@ -62,8 +62,8 @@
 			children = (
 				A7876D161F49BCBA00AED4A0 /* AppDelegate.swift */,
 				A7876D301F49CD3800AED4A0 /* API.swift */,
-				A74352301F4AC3EF00732EEE /* GitHubUser.swift */,
 				A74352321F4AC50E00732EEE /* Constants.swift */,
+				A74352301F4AC3EF00732EEE /* GitHubUser.swift */,
 				A7876D2E1F49C44100AED4A0 /* SearchViewController.swift */,
 				A7876D201F49BCBA00AED4A0 /* Assets.xcassets */,
 				A7876D221F49BCBA00AED4A0 /* LaunchScreen.storyboard */,
