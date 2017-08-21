@@ -35,6 +35,27 @@ class API {
         }.resume()
     }
 
+    func getImageFrom(url: String, callback: @escaping (UIImage?) -> Void) -> URLSessionTask? {
+        let asyncCallback = { (image: UIImage?) in
+            DispatchQueue.main.async {
+                callback(image)
+            }
+        }
+        guard let url = URL(string: url) else {
+            asyncCallback(nil)
+            return nil
+        }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data, let image = UIImage(data: data) {
+                asyncCallback(image)
+            } else {
+                asyncCallback(nil)
+            }
+        }
+        task.resume()
+        return task
+    }
+
     func getGitHubUsers(query: String, callback: @escaping ([GitHubUser]?) -> Void) {
         let asyncCallback = { (users: [GitHubUser]?) in
             DispatchQueue.main.async {

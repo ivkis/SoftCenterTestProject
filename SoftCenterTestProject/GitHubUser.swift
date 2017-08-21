@@ -18,7 +18,7 @@ class GitHubUser {
 
     init(json: [String: AnyObject]) {
         login = json["login"] as? String ?? ""
-        avatarUrl = json["avatarUrl"] as? String ?? ""
+        avatarUrl = json["avatar_url"] as? String ?? ""
         url = json["url"] as? String ?? ""
     }
 }

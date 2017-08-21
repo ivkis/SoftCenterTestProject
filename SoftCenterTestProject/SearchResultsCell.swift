@@ -12,6 +12,7 @@ import UIKit
 
 class SearchResultsCell: UITableViewCell {
     fileprivate var contentConstraints: [NSLayoutConstraint]?
+    fileprivate weak var imageLoadTask: URLSessionTask?
     var photoImageView: UIImageView!
     var titleLabel: UILabel!
     var subtitleLabel: UILabel!
@@ -47,6 +48,14 @@ class SearchResultsCell: UITableViewCell {
     func configure(with gitHubUser: GitHubUser, isEven: Bool) {
         titleLabel.text = gitHubUser.login
         subtitleLabel.text = gitHubUser.url
+        photoImageView.image = nil
+
+        imageLoadTask?.cancel()
+        if !gitHubUser.avatarUrl.isEmpty {
+            imageLoadTask = API.shared.getImageFrom(url: gitHubUser.avatarUrl) { image in
+                self.photoImageView.image = image
+            }
+        }
         setEvenUI(isEven)
     }
 
