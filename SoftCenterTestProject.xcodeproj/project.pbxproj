@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A7273B691F4B18AD00FE9C2D /* GitHubDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7273B681F4B18AD00FE9C2D /* GitHubDataSource.swift */; };
 		A7273B6B1F4B272500FE9C2D /* ITunesTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7273B6A1F4B272500FE9C2D /* ITunesTrack.swift */; };
+		A7273B711F4B3A8500FE9C2D /* ITunesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7273B701F4B3A8500FE9C2D /* ITunesDataSource.swift */; };
 		A74352311F4AC3EF00732EEE /* GitHubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352301F4AC3EF00732EEE /* GitHubUser.swift */; };
 		A74352331F4AC50E00732EEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352321F4AC50E00732EEE /* Constants.swift */; };
 		A74352351F4AFDFE00732EEE /* SearchResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352341F4AFDFE00732EEE /* SearchResultsCell.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		A7273B681F4B18AD00FE9C2D /* GitHubDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubDataSource.swift; sourceTree = "<group>"; };
 		A7273B6A1F4B272500FE9C2D /* ITunesTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesTrack.swift; sourceTree = "<group>"; };
+		A7273B701F4B3A8500FE9C2D /* ITunesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesDataSource.swift; sourceTree = "<group>"; };
 		A74352301F4AC3EF00732EEE /* GitHubUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubUser.swift; sourceTree = "<group>"; };
 		A74352321F4AC50E00732EEE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A74352341F4AFDFE00732EEE /* SearchResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCell.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				A74352321F4AC50E00732EEE /* Constants.swift */,
 				A7273B681F4B18AD00FE9C2D /* GitHubDataSource.swift */,
 				A74352301F4AC3EF00732EEE /* GitHubUser.swift */,
+				A7273B701F4B3A8500FE9C2D /* ITunesDataSource.swift */,
 				A7273B6A1F4B272500FE9C2D /* ITunesTrack.swift */,
 				A7876D2E1F49C44100AED4A0 /* SearchViewController.swift */,
 				A74352341F4AFDFE00732EEE /* SearchResultsCell.swift */,
@@ -156,6 +159,7 @@
 			files = (
 				A7876D2F1F49C44100AED4A0 /* SearchViewController.swift in Sources */,
 				A7876D171F49BCBA00AED4A0 /* AppDelegate.swift in Sources */,
+				A7273B711F4B3A8500FE9C2D /* ITunesDataSource.swift in Sources */,
 				A7876D311F49CD3800AED4A0 /* API.swift in Sources */,
 				A7273B6B1F4B272500FE9C2D /* ITunesTrack.swift in Sources */,
 				A74352331F4AC50E00732EEE /* Constants.swift in Sources */,
