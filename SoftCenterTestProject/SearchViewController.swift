@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     var tableView: UITableView!
     var segmentedControl: UISegmentedControl!
     var searchBar: UISearchBar!
+    var zoomedImageView: UIImageView!
 
     var githubDataSource: GitHubDataSource!
     var itunesDataSource: ITunesDataSource!
@@ -37,6 +38,17 @@ class SearchViewController: UIViewController {
         tableView.rowHeight = 80
         view.addSubview(tableView)
 
+        zoomedImageView = UIImageView()
+        zoomedImageView.translatesAutoresizingMaskIntoConstraints = false
+        zoomedImageView.isHidden = true
+        zoomedImageView.backgroundColor = .black
+        zoomedImageView.contentMode = .scaleAspectFit
+        zoomedImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissFullscreenImage))
+        zoomedImageView.addGestureRecognizer(tap)
+        view.addSubview(zoomedImageView)
+
+
         view.addConstraints([
             segmentedControl.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 20),
             segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -48,7 +60,12 @@ class SearchViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 5),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            zoomedImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            zoomedImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            zoomedImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            zoomedImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
 
         segmentedControl.selectedSegmentIndex = 0
@@ -60,15 +77,21 @@ class SearchViewController: UIViewController {
         if segmentedControl.selectedSegmentIndex == 0 {
             itunesDataSource = ITunesDataSource(tableView: tableView)
             itunesDataSource.delegate = self
+            itunesDataSource.cellDelegate = self
             tableView.dataSource = itunesDataSource
             searchBar.delegate = itunesDataSource
         } else {
             githubDataSource = GitHubDataSource(tableView: tableView)
             githubDataSource.delegate = self
+            githubDataSource.cellDelegate = self
             tableView.dataSource = githubDataSource
             searchBar.delegate = githubDataSource
         }
         tableView.reloadData()
+    }
+
+    func dismissFullscreenImage() {
+        zoomedImageView.isHidden = true
     }
 }
 
@@ -78,5 +101,15 @@ extension SearchViewController: DataSourceDelegate {
         let alertController = UIAlertController(title: "Data not available", message: "Sorry, an error occurred. Try again later.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+
+extension SearchViewController: SearchResultsCellDelegate {
+    func searchResultsCell(_ cell: SearchResultsCell, didTapImageView imageView: UIImageView) {
+        zoomedImageView.image = imageView.image
+        zoomedImageView.isHidden = false
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
     }
 }

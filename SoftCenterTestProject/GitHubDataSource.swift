@@ -20,6 +20,7 @@ class GitHubDataSource: NSObject {
     var gitHubUsers: [GitHubUser]?
     var tableView: UITableView
     weak var delegate: DataSourceDelegate?
+    weak var cellDelegate: SearchResultsCellDelegate?
 
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -50,7 +51,7 @@ extension GitHubDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchResultsCell.self), for: indexPath) as! SearchResultsCell
         let user = gitHubUsers![indexPath.row]
         cell.configure(with: user, isRight: indexPath.row % 2 == 0)
-
+        cell.delegate = cellDelegate
         return cell
     }
 }

@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 
+protocol SearchResultsCellDelegate: class {
+    func searchResultsCell(_ cell: SearchResultsCell, didTapImageView imageView: UIImageView)
+}
+
+
 class SearchResultsCell: UITableViewCell {
 
     fileprivate var contentConstraints: [NSLayoutConstraint]?
@@ -17,6 +22,7 @@ class SearchResultsCell: UITableViewCell {
     var photoImageView: UIImageView!
     var titleLabel: UILabel!
     var subtitleLabel: UILabel!
+    weak var delegate: SearchResultsCellDelegate?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -31,6 +37,7 @@ class SearchResultsCell: UITableViewCell {
     func setupSearchResultsCell() {
         photoImageView = UIImageView()
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
+        photoImageView.isUserInteractionEnabled = true
         photoImageView.addConstraint(photoImageView.widthAnchor.constraint(equalTo: photoImageView.heightAnchor, multiplier: 1))
         photoImageView.backgroundColor = .lightGray
         self.contentView.addSubview(photoImageView)
@@ -44,6 +51,9 @@ class SearchResultsCell: UITableViewCell {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.numberOfLines = 2
         self.contentView.addSubview(subtitleLabel)
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped(_:)))
+        photoImageView.addGestureRecognizer(tapGesture)
     }
 
     func setPhotoImageWith(url: String) {
@@ -107,5 +117,9 @@ class SearchResultsCell: UITableViewCell {
             titleLabel.textAlignment = .left
             subtitleLabel.textAlignment = .left
         }
+    }
+
+    func imageTapped(_ sender: UITapGestureRecognizer) {
+        delegate?.searchResultsCell(self, didTapImageView: photoImageView)
     }
 }

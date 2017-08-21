@@ -15,6 +15,7 @@ class ITunesDataSource: NSObject {
     var iTunesTracks: [ITunesTrack]?
     var tableView: UITableView
     weak var delegate: DataSourceDelegate?
+    weak var cellDelegate: SearchResultsCellDelegate?
 
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -45,7 +46,7 @@ extension ITunesDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchResultsCell.self), for: indexPath) as! SearchResultsCell
         let track = iTunesTracks![indexPath.row]
         cell.configure(with: track, isRight: indexPath.row % 2 == 0)
-
+        cell.delegate = cellDelegate
         return cell
     }
 }
