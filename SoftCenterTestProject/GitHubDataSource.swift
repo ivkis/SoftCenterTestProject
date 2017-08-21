@@ -9,11 +9,17 @@
 import UIKit
 
 
+protocol DataSourceDelegate: class {
+    func dataSourceDidFailWithError(_ dataSource: AnyObject)
+}
+
+
 class GitHubDataSource: NSObject {
 
     weak var dataLoadTask: URLSessionTask?
     var gitHubUsers: [GitHubUser]?
     var tableView: UITableView
+    weak var delegate: DataSourceDelegate?
 
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -28,14 +34,7 @@ class GitHubDataSource: NSObject {
             self.gitHubUsers = users
             self.tableView.reloadData()
             if users == nil {
-                let alertController = UIAlertController(title: "Data not available", message: "Sorry, an error occurred. Update query.", preferredStyle: .alert)
-                let alertActionUpdate = UIAlertAction(title: "Update", style: .default, handler: { action in
-                    self.loadData(query: query)
-                })
-                let alertActionCancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-                alertController.addAction(alertActionUpdate)
-                alertController.addAction(alertActionCancel)
-//                self.present(alertController, animated: true, completion: nil)
+                self.delegate?.dataSourceDidFailWithError(self)
             }
         }
     }

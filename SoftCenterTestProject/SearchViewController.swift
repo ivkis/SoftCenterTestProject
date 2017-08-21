@@ -59,13 +59,24 @@ class SearchViewController: UIViewController {
         searchBar.text = ""
         if segmentedControl.selectedSegmentIndex == 0 {
             itunesDataSource = ITunesDataSource(tableView: tableView)
+            itunesDataSource.delegate = self
             tableView.dataSource = itunesDataSource
             searchBar.delegate = itunesDataSource
         } else {
             githubDataSource = GitHubDataSource(tableView: tableView)
+            githubDataSource.delegate = self
             tableView.dataSource = githubDataSource
             searchBar.delegate = githubDataSource
         }
         tableView.reloadData()
+    }
+}
+
+
+extension SearchViewController: DataSourceDelegate {
+    func dataSourceDidFailWithError(_ dataSource: AnyObject) {
+        let alertController = UIAlertController(title: "Data not available", message: "Sorry, an error occurred. Try again later.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
 }

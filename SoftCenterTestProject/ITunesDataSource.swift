@@ -14,6 +14,7 @@ class ITunesDataSource: NSObject {
     weak var dataLoadTask: URLSessionTask?
     var iTunesTracks: [ITunesTrack]?
     var tableView: UITableView
+    weak var delegate: DataSourceDelegate?
 
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -28,7 +29,7 @@ class ITunesDataSource: NSObject {
             self.iTunesTracks = tracks
             self.tableView.reloadData()
             if tracks == nil {
-                print("Error on server")
+                self.delegate?.dataSourceDidFailWithError(self)
             }
         }
     }
