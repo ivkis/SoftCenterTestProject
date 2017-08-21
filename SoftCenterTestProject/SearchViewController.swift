@@ -30,6 +30,8 @@ class SearchViewController: UIViewController {
 
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(SearchResultsCell.self, forCellReuseIdentifier: String(describing: SearchResultsCell.self))
+        tableView.rowHeight = 80
         tableView.dataSource = self
         view.addSubview(tableView)
 
@@ -75,9 +77,9 @@ extension SearchViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let user = gitHubUsers?[indexPath.row]
-        cell.textLabel?.text = user?.login
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchResultsCell.self), for: indexPath) as! SearchResultsCell
+        let user = gitHubUsers![indexPath.row]
+        cell.configure(with: user, isEven: indexPath.row % 2 == 0)
 
         return cell
     }
