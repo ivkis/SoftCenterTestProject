@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7273B691F4B18AD00FE9C2D /* GitHubDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7273B681F4B18AD00FE9C2D /* GitHubDataSource.swift */; };
 		A74352311F4AC3EF00732EEE /* GitHubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352301F4AC3EF00732EEE /* GitHubUser.swift */; };
 		A74352331F4AC50E00732EEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352321F4AC50E00732EEE /* Constants.swift */; };
 		A74352351F4AFDFE00732EEE /* SearchResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352341F4AFDFE00732EEE /* SearchResultsCell.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A7273B681F4B18AD00FE9C2D /* GitHubDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubDataSource.swift; sourceTree = "<group>"; };
 		A74352301F4AC3EF00732EEE /* GitHubUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubUser.swift; sourceTree = "<group>"; };
 		A74352321F4AC50E00732EEE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A74352341F4AFDFE00732EEE /* SearchResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCell.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				A7876D301F49CD3800AED4A0 /* API.swift */,
 				A74352321F4AC50E00732EEE /* Constants.swift */,
 				A74352301F4AC3EF00732EEE /* GitHubUser.swift */,
+				A7273B681F4B18AD00FE9C2D /* GitHubDataSource.swift */,
 				A7876D2E1F49C44100AED4A0 /* SearchViewController.swift */,
 				A74352341F4AFDFE00732EEE /* SearchResultsCell.swift */,
 				A7876D201F49BCBA00AED4A0 /* Assets.xcassets */,
@@ -155,6 +158,7 @@
 				A7876D1F1F49BCBA00AED4A0 /* SoftCenterTestProject.xcdatamodeld in Sources */,
 				A74352351F4AFDFE00732EEE /* SearchResultsCell.swift in Sources */,
 				A74352311F4AC3EF00732EEE /* GitHubUser.swift in Sources */,
+				A7273B691F4B18AD00FE9C2D /* GitHubDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

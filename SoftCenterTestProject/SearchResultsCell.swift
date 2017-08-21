@@ -11,6 +11,7 @@ import UIKit
 
 
 class SearchResultsCell: UITableViewCell {
+
     fileprivate var contentConstraints: [NSLayoutConstraint]?
     fileprivate weak var imageLoadTask: URLSessionTask?
     var photoImageView: UIImageView!
@@ -45,7 +46,7 @@ class SearchResultsCell: UITableViewCell {
         self.contentView.addSubview(subtitleLabel)
     }
 
-    func configure(with gitHubUser: GitHubUser, isEven: Bool) {
+    func configure(with gitHubUser: GitHubUser, isRight: Bool) {
         titleLabel.text = gitHubUser.login
         subtitleLabel.text = gitHubUser.url
         photoImageView.image = nil
@@ -56,12 +57,12 @@ class SearchResultsCell: UITableViewCell {
                 self.photoImageView.image = image
             }
         }
-        setEvenUI(isEven)
+        setEvenUI(isRight)
     }
 
-    func setEvenUI(_ isEven: Bool) {
+    func setEvenUI(_ isRight: Bool) {
         contentConstraints?.forEach({ $0.isActive = false })
-        if isEven {
+        if isRight {
             contentConstraints = [
                 photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
                 photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
@@ -95,7 +96,6 @@ class SearchResultsCell: UITableViewCell {
             contentView.addConstraints(contentConstraints!)
             titleLabel.textAlignment = .left
             subtitleLabel.textAlignment = .left
-            
         }
     }
 }
