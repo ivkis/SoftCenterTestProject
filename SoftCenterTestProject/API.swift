@@ -76,4 +76,25 @@ class API {
             asyncCallback(users)
         }
     }
+
+    func getITunesTrack(query: String, callback: @escaping ([ITunesTrack]?) -> Void) {
+        let asyncCallback = { (tracks: [ITunesTrack]?) in
+            DispatchQueue.main.async {
+                callback(tracks)
+            }
+        }
+        getJSON(url: Constants.urlITunesInfo, params: ["term": query]) { json in
+            guard let json = json as? [String: AnyObject] else {
+                print("Non-dictionary response")
+                asyncCallback(nil)
+                return
+            }
+            guard let results = json["results"] as? [[String: AnyObject]] else {
+                asyncCallback(nil)
+                return
+            }
+            let tracks = results.map { dict in ITunesTrack(json: dict) }
+            asyncCallback(tracks)
+        }
+    }
 }

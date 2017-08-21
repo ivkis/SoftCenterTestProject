@@ -11,5 +11,6 @@ import Foundation
 
 enum Constants {
     static let urlGitHubInfo = URL(string: "https://api.github.com/search/users")!
+    static let urlITunesInfo = URL(string: "https://itunes.apple.com/search")!
 }
 
