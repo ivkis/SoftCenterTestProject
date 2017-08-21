@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A74352311F4AC3EF00732EEE /* GitHubUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352301F4AC3EF00732EEE /* GitHubUser.swift */; };
+		A74352331F4AC50E00732EEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74352321F4AC50E00732EEE /* Constants.swift */; };
 		A7876D171F49BCBA00AED4A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7876D161F49BCBA00AED4A0 /* AppDelegate.swift */; };
 		A7876D1F1F49BCBA00AED4A0 /* SoftCenterTestProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A7876D1D1F49BCBA00AED4A0 /* SoftCenterTestProject.xcdatamodeld */; };
 		A7876D211F49BCBA00AED4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7876D201F49BCBA00AED4A0 /* Assets.xcassets */; };
 		A7876D241F49BCBA00AED4A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7876D221F49BCBA00AED4A0 /* LaunchScreen.storyboard */; };
 		A7876D2F1F49C44100AED4A0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7876D2E1F49C44100AED4A0 /* SearchViewController.swift */; };
+		A7876D311F49CD3800AED4A0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7876D301F49CD3800AED4A0 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A74352301F4AC3EF00732EEE /* GitHubUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubUser.swift; sourceTree = "<group>"; };
+		A74352321F4AC50E00732EEE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A7876D131F49BCBA00AED4A0 /* SoftCenterTestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoftCenterTestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7876D161F49BCBA00AED4A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7876D1E1F49BCBA00AED4A0 /* SoftCenterTestProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SoftCenterTestProject.xcdatamodel; sourceTree = "<group>"; };
@@ -22,6 +27,7 @@
 		A7876D231F49BCBA00AED4A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7876D251F49BCBA00AED4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7876D2E1F49C44100AED4A0 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		A7876D301F49CD3800AED4A0 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +61,14 @@
 			isa = PBXGroup;
 			children = (
 				A7876D161F49BCBA00AED4A0 /* AppDelegate.swift */,
+				A7876D301F49CD3800AED4A0 /* API.swift */,
+				A74352301F4AC3EF00732EEE /* GitHubUser.swift */,
+				A74352321F4AC50E00732EEE /* Constants.swift */,
+				A7876D2E1F49C44100AED4A0 /* SearchViewController.swift */,
 				A7876D201F49BCBA00AED4A0 /* Assets.xcassets */,
 				A7876D221F49BCBA00AED4A0 /* LaunchScreen.storyboard */,
 				A7876D251F49BCBA00AED4A0 /* Info.plist */,
 				A7876D1D1F49BCBA00AED4A0 /* SoftCenterTestProject.xcdatamodeld */,
-				A7876D2E1F49C44100AED4A0 /* SearchViewController.swift */,
 			);
 			path = SoftCenterTestProject;
 			sourceTree = "<group>";
@@ -138,7 +147,10 @@
 			files = (
 				A7876D2F1F49C44100AED4A0 /* SearchViewController.swift in Sources */,
 				A7876D171F49BCBA00AED4A0 /* AppDelegate.swift in Sources */,
+				A7876D311F49CD3800AED4A0 /* API.swift in Sources */,
+				A74352331F4AC50E00732EEE /* Constants.swift in Sources */,
 				A7876D1F1F49BCBA00AED4A0 /* SoftCenterTestProject.xcdatamodeld in Sources */,
+				A74352311F4AC3EF00732EEE /* GitHubUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
