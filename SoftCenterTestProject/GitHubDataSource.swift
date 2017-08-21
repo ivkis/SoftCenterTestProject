@@ -11,6 +11,7 @@ import UIKit
 
 class GitHubDataSource: NSObject {
 
+    weak var dataLoadTask: URLSessionTask?
     var gitHubUsers: [GitHubUser]?
     var tableView: UITableView
 
@@ -22,7 +23,8 @@ class GitHubDataSource: NSObject {
         guard let query = query else {
             return
         }
-        API.shared.getGitHubUsers(query: query) { users in
+        dataLoadTask?.cancel()
+        dataLoadTask = API.shared.getGitHubUsers(query: query) { users in
             self.gitHubUsers = users
             self.tableView.reloadData()
             if users == nil {

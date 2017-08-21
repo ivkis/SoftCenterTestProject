@@ -11,6 +11,7 @@ import UIKit
 
 class ITunesDataSource: NSObject {
 
+    weak var dataLoadTask: URLSessionTask?
     var iTunesTracks: [ITunesTrack]?
     var tableView: UITableView
 
@@ -22,7 +23,8 @@ class ITunesDataSource: NSObject {
         guard let query = query else {
             return
         }
-        API.shared.getITunesTrack(query: query) { tracks in
+        dataLoadTask?.cancel()
+        dataLoadTask = API.shared.getITunesTrack(query: query) { tracks in
             self.iTunesTracks = tracks
             self.tableView.reloadData()
             if tracks == nil {

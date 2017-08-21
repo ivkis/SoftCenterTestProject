@@ -14,13 +14,13 @@ class API {
 
     static let shared = API()
 
-    fileprivate func getJSON(url: URL, params: [String: String], callback: @escaping (Any?) -> Void) {
+    fileprivate func getJSON(url: URL, params: [String: String], callback: @escaping (Any?) -> Void) -> URLSessionTask {
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         components.queryItems = params.map { key, value in
             URLQueryItem(name: key, value: value)
         }
 
-        URLSession.shared.dataTask(with: components.url!) { data, response, error in
+        let task = URLSession.shared.dataTask(with: components.url!) { data, response, error in
             guard let data = data, error == nil else {
                 callback(nil)
                 return
@@ -32,7 +32,9 @@ class API {
                 print(error)
                 callback(nil)
             }
-        }.resume()
+        }
+        task.resume()
+        return task
     }
 
     func getImageFrom(url: String, callback: @escaping (UIImage?) -> Void) -> URLSessionTask? {
@@ -56,13 +58,13 @@ class API {
         return task
     }
 
-    func getGitHubUsers(query: String, callback: @escaping ([GitHubUser]?) -> Void) {
+    func getGitHubUsers(query: String, callback: @escaping ([GitHubUser]?) -> Void) -> URLSessionTask {
         let asyncCallback = { (users: [GitHubUser]?) in
             DispatchQueue.main.async {
                 callback(users)
             }
         }
-        getJSON(url: Constants.urlGitHubInfo, params: ["q": query]) { json in
+        return getJSON(url: Constants.urlGitHubInfo, params: ["q": query]) { json in
             guard let json = json as? [String: AnyObject] else {
                 print("Non-dictionary response")
                 asyncCallback(nil)
@@ -77,13 +79,13 @@ class API {
         }
     }
 
-    func getITunesTrack(query: String, callback: @escaping ([ITunesTrack]?) -> Void) {
+    func getITunesTrack(query: String, callback: @escaping ([ITunesTrack]?) -> Void) -> URLSessionTask {
         let asyncCallback = { (tracks: [ITunesTrack]?) in
             DispatchQueue.main.async {
                 callback(tracks)
             }
         }
-        getJSON(url: Constants.urlITunesInfo, params: ["term": query]) { json in
+        return getJSON(url: Constants.urlITunesInfo, params: ["term": query]) { json in
             guard let json = json as? [String: AnyObject] else {
                 print("Non-dictionary response")
                 asyncCallback(nil)
