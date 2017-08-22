@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = SearchViewController()
         window!.makeKeyAndVisible()
 
+        addKeyboardDismissGestureRecognizer()
+
         return true
     }
 
@@ -92,5 +94,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    // MARK: - Dismiss keyboard on tap outside of field
+
+    func addKeyboardDismissGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AppDelegate.windowDidTap(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        window?.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    func windowDidTap(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view else {
+            return
+        }
+        let location = sender.location(in: nil)
+        let subview = view.hitTest(location, with:nil)
+        let isShowingAlert = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.isKind(of: UIAlertController.self) == true
+        if !isShowingAlert && subview?.isKind(of: UIControl.self) != true {
+            window?.endEditing(false)
+        }
+    }
 }
 
