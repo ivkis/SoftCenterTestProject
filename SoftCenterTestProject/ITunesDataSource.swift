@@ -16,15 +16,13 @@ class ITunesDataSource: NSObject {
     var tableView: UITableView
     weak var delegate: DataSourceDelegate?
     weak var cellDelegate: SearchResultsCellDelegate?
+    var query = ""
 
     init(tableView: UITableView) {
         self.tableView = tableView
     }
 
-    func loadData(query: String?) {
-        guard let query = query else {
-            return
-        }
+    func loadData() {
         dataLoadTask?.cancel()
         dataLoadTask = API.shared.getITunesTrack(query: query) { tracks in
             self.iTunesTracks = tracks
@@ -54,6 +52,7 @@ extension ITunesDataSource: UITableViewDataSource {
 
 extension ITunesDataSource: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        loadData(query: searchText)
+        query = searchText
+        loadData()
     }
 }

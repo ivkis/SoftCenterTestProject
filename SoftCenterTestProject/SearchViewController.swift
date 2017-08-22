@@ -68,24 +68,26 @@ class SearchViewController: UIViewController {
             zoomedImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
 
+        githubDataSource = GitHubDataSource(tableView: tableView)
+        githubDataSource.delegate = self
+        githubDataSource.cellDelegate = self
+        itunesDataSource = ITunesDataSource(tableView: tableView)
+        itunesDataSource.delegate = self
+        itunesDataSource.cellDelegate = self
+
         segmentedControl.selectedSegmentIndex = 0
         switchSegmentedControl()
     }
 
     func switchSegmentedControl() {
-        searchBar.text = ""
         if segmentedControl.selectedSegmentIndex == 0 {
-            itunesDataSource = ITunesDataSource(tableView: tableView)
-            itunesDataSource.delegate = self
-            itunesDataSource.cellDelegate = self
             tableView.dataSource = itunesDataSource
             searchBar.delegate = itunesDataSource
+            searchBar.text = itunesDataSource.query
         } else {
-            githubDataSource = GitHubDataSource(tableView: tableView)
-            githubDataSource.delegate = self
-            githubDataSource.cellDelegate = self
             tableView.dataSource = githubDataSource
             searchBar.delegate = githubDataSource
+            searchBar.text = githubDataSource.query
         }
         tableView.reloadData()
     }
