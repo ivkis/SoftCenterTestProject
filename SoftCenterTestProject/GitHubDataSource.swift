@@ -28,6 +28,11 @@ class GitHubDataSource: NSObject {
     }
 
     func loadData() {
+        guard !query.isEmpty else {
+            gitHubUsers = []
+            tableView.reloadData()
+            return
+        }
         dataLoadTask?.cancel()
         dataLoadTask = API.shared.getGitHubUsers(query: query) { users in
             self.gitHubUsers = users

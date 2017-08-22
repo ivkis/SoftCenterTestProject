@@ -23,6 +23,11 @@ class ITunesDataSource: NSObject {
     }
 
     func loadData() {
+        guard !query.isEmpty else {
+            iTunesTracks = []
+            tableView.reloadData()
+            return
+        }
         dataLoadTask?.cancel()
         dataLoadTask = API.shared.getITunesTrack(query: query) { tracks in
             self.iTunesTracks = tracks
