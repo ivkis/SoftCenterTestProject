@@ -22,7 +22,8 @@ class API {
 
         let task = URLSession.shared.dataTask(with: components.url!) { data, response, error in
             guard let data = data, error == nil else {
-                if let error = error as? NSError, error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
+                let nsError = error == nil ? nil : error! as NSError
+                if nsError?.domain == NSURLErrorDomain && nsError?.code == NSURLErrorCancelled {
                     // Don't fire callback
                 } else {
                     callback(nil)
