@@ -9,15 +9,14 @@
 import UIKit
 
 
-class ITunesTrack {
+class ITunesTrack: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case trackName
+        case artworkUrl = "artworkUrl100"
+        case artistName
+    }
 
     let trackName: String
     let artworkUrl: String
-    let artistName:String
-
-    init(json: [String: AnyObject]) {
-        trackName = json["trackName"] as? String ?? ""
-        artworkUrl = json["artworkUrl100"] as? String ?? ""
-        artistName = json["artistName"] as? String ?? ""
-    }
+    let artistName: String
 }

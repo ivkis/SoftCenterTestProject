@@ -10,11 +10,20 @@ import Foundation
 import UIKit
 
 
+struct JsonUsers: Decodable {
+    var items: [GitHubUser]?
+}
+
+struct JsonTracks: Decodable {
+    var results: [ITunesTrack]?
+}
+
+
 class API {
 
     static let shared = API()
 
-    fileprivate func getJSON(url: URL, params: [String: String], callback: @escaping (Any?) -> Void) -> URLSessionTask {
+    fileprivate func getJSON(url: URL, params: [String: String], callback: @escaping (Data?) -> Void) -> URLSessionTask {
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         components.queryItems = params.map { key, value in
             URLQueryItem(name: key, value: value)
@@ -30,13 +39,7 @@ class API {
                 }
                 return
             }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data)
-                callback(json)
-            } catch {
-                print(error)
-                callback(nil)
-            }
+            callback(data)
         }
         task.resume()
         return task
@@ -69,18 +72,13 @@ class API {
                 callback(users)
             }
         }
-        return getJSON(url: Constants.urlGitHubInfo, params: ["q": query]) { json in
-            guard let json = json as? [String: AnyObject] else {
-                print("Non-dictionary response")
+        return getJSON(url: Constants.urlGitHubInfo, params: ["q": query]) { data in
+            guard let data = data else {
                 asyncCallback(nil)
                 return
             }
-            guard let results = json["items"] as? [[String: AnyObject]] else {
-                asyncCallback(nil)
-                return
-            }
-            let users = results.map { dict in GitHubUser(json: dict) }
-            asyncCallback(users)
+            let info = try? JSONDecoder().decode(JsonUsers.self, from: data)
+            asyncCallback(info?.items)
         }
     }
 
@@ -90,18 +88,13 @@ class API {
                 callback(tracks)
             }
         }
-        return getJSON(url: Constants.urlITunesInfo, params: ["term": query]) { json in
-            guard let json = json as? [String: AnyObject] else {
-                print("Non-dictionary response")
+        return getJSON(url: Constants.urlITunesInfo, params: ["term": query]) { data in
+            guard let data = data else {
                 asyncCallback(nil)
                 return
             }
-            guard let results = json["results"] as? [[String: AnyObject]] else {
-                asyncCallback(nil)
-                return
-            }
-            let tracks = results.map { dict in ITunesTrack(json: dict) }
-            asyncCallback(tracks)
+            let info = try? JSONDecoder().decode(JsonTracks.self, from: data)
+            asyncCallback(info?.results)
         }
     }
 }

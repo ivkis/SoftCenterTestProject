@@ -10,15 +10,14 @@ import Foundation
 import UIKit
 
 
-class GitHubUser {
+class GitHubUser: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case login
+        case avatarUrl = "avatar_url"
+        case url
+    }
 
     let login: String
     let avatarUrl: String
     let url: String
-
-    init(json: [String: AnyObject]) {
-        login = json["login"] as? String ?? ""
-        avatarUrl = json["avatar_url"] as? String ?? ""
-        url = json["url"] as? String ?? ""
-    }
 }
